@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: gatecheck-concordium
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: AGENT_PUBLIC_URL
+        value: https://gatecheck-concordium.onrender.com
+      - key: CONCORDIUM_NETWORK
+        value: testnet
+      - key: AGENT_HMAC_SECRET
+        sync: false
+      # After CIS-8004 registration (REGISTER.md), set these and redeploy:
+      # - key: CONCORDIUM_TOKEN_ADDRESS
+      #   sync: false
+      # - key: CONCORDIUM_TOKEN_ID
+      #   sync: false
