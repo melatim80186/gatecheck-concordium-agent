@@ -4,19 +4,22 @@ User-side step (~10 minutes). The repo cannot deploy itself: Render
 needs the GitHub connection, which only the account owner can grant.
 
 1. Push this repo to GitHub (already done — see repo URL in CHECKPOINT.md).
-2. Render dashboard → **New → Web Service** → connect the
-   `gatecheck-concordium-agent` repo. `render.yaml` is auto-detected.
-3. Plan: **Free**. Build: `npm install`. Start: `npm start`.
-4. Environment variables (Render → Environment):
-   - `AGENT_PUBLIC_URL` = `https://gatecheck-concordium.onrender.com`
-     (already in `render.yaml`)
-   - `CONCORDIUM_NETWORK` = `testnet` (already in `render.yaml`)
-   - `AGENT_HMAC_SECRET` = a fresh random secret (generate one;
-     `sync: false` — set it in the dashboard, never commit it).
-     This signs responses with `x-agent-games-signature`, the same
-     scheme GateCheck uses. Any value works for the demo; keep it
-     secret.
-5. Deploy, then smoke-test:
+2. Render dashboard (https://dashboard.render.com) → **New → Blueprint**
+   → select the `gatecheck-concordium-agent` repo. `render.yaml` at the
+   repo root is a Blueprint: Render auto-detects it and shows the
+   `gatecheck-concordium` web service (plan Free, build `npm install`,
+   start `npm start`). Click **Apply** / **Deploy Blueprint**.
+   (Do NOT use New → Web Service for this repo — that path ignores
+   `render.yaml` and needs the build/start commands typed by hand.)
+3. When Render prompts for the `sync: false` secret, set:
+   - `AGENT_HMAC_SECRET` = a fresh random secret (generate one in the
+     dashboard prompt; never commit it). This signs responses with
+     `x-agent-games-signature`, the same scheme GateCheck uses. Any
+     value works for the demo; keep it secret.
+   `AGENT_PUBLIC_URL` and `CONCORDIUM_NETWORK` come from `render.yaml`
+   already.
+4. Wait for status **Live** (first build takes a few minutes; free tier
+   cold-starts take ~30–60 s on first hit after 15 min idle).
    ```bash
    curl https://gatecheck-concordium.onrender.com/health
    curl https://gatecheck-concordium.onrender.com/.well-known/agent-card.json

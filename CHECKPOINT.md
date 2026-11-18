@@ -33,18 +33,40 @@ claim → APPROVE with evidence.
 
 ## Status at checkpoint
 
-- [x] Agent running locally; `npm test` 49/49 PASS (live Concordium
+- [x] Agent running locally; `npm test` 49/49 PASS — **re-run and
+  re-verified 2026-11-19 ~19:20 WIB by the agent** (live Concordium
   badge-check + hosted MCP, live BSC verification, live x402
   facilitator verify — signature + EIP-712 domain proven, only
-  balance missing on the unfunded throwaway payer).
+  balance missing on the unfunded throwaway payer). Local smoke test
+  same day: `/health` ok, `/info` reports `pending-registration`,
+  card SHA-256 `0fb1822a…5d27`, live mainnet badge check
+  `verified: true`, MCP `tools/list` returns 4 tools.
 - [x] ERC-8004 registration file + A2A card + card SHA-256; MCP (4
   tools) + minimal A2A; hash-chained audit trail.
+- [x] Checkpoint material ready (this file). **Checkpoint 1 is filed
+  inside the Encode Club platform, not a public form:** log in at
+  https://www.encodeclub.com/programmes/concordium-trusted-agents-hackathon
+  (Encode Club account required) and submit project + team + idea
+  there, due **22 Nov 2026**. No separate public checkpoint form link
+  exists — the official Concordium article lists only the programme
+  page. Deadline + checkpoint re-verified against the official
+  article 2026-11-19.
 - [ ] Render deploy (user step — connect repo, set env; 10 min).
+  DEPLOY.md corrected 2026-11-19: the `render.yaml` flow is
+  **New → Blueprint** (verified against Render's own docs), not
+  New → Web Service. No Render credential exists on the agent VM
+  (no CLI, no token, no env var) — deploy cannot be done agent-side.
 - [ ] CIS-8004 on-chain registration (user step — needs the owner's
   verified Concordium testnet identity; REGISTER.md).
 - [ ] Funded Base Sepolia USDC payer for a live x402 settle demo
-  (user step — Circle testnet faucet).
+  (user step — Circle testnet faucet, 2 min, free). **Agent-side
+  prep done 2026-11-19:** persistent throwaway payer
+  `0xe6e139d5292efd5ffb63347b33b6fc13dd7feab8` (key in gitignored
+  `x402-payer.json`, mode 600; on-chain balance verified 0 USDC),
+  probe script `settle-probe.mjs` (exits cleanly unfunded), full
+  steps in X402-SETTLE.md.
 - [ ] Demo video (≤3 min) + submission (due 9 Dec 23:59 UTC).
+  Outline + script ready in VIDEO.md (record after Render is live).
 
 ## Why this fits the brief
 

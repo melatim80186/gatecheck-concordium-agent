@@ -2,3 +2,4 @@ node_modules/
 x402-wallet.json
 audit.jsonl
 .DS_Store
+x402-payer.json
